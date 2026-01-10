@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник настроения</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .slider-container {
+            position: relative;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-item:hover {
+            background: #e8e8e8;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .radio-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-item:hover {
+            background: #e8e8e8;
+        }
+
+        .radio-item input[type="radio"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .emoji {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Дневник настроения</h1>
+        
+        <form id="moodForm">
+            <!-- Качество сна -->
+            <div class="form-group">
+                <label>
+                    <span class="emoji">😴</span>Качество сна:
+                    <span class="slider-value" id="sleepValue">5</span>/10
+                </label>
+                <div class="slider-container">
+                    <input type="range" id="sleep" min="1" max="10" value="5" 
+                           oninput="document.getElementById('sleepValue').textContent = this.value">
+                </div>
+            </div>
+
+            <!-- Утренняя энергия -->
+            <div class="form-group">
+                <label>
+                    <span class="emoji">🌅</span>Утренняя энергия:
+                    <span class="slider-value" id="morningValue">5</span>/10
+                </label>
+                <div class="slider-container">
+                    <input type="range" id="morningEnergy" min="1" max="10" value="5"
+                           oninput="document.getElementById('morningValue').textContent = this.value">
+                </div>
+            </div>
+
+            <!-- Дневная энергия -->
+            <div class="form-group">
+                <label>
+                    <span class="emoji">☀️</span>Дневная энергия:
+                    <span class="slider-value" id="dayValue">5</span>/10
+                </label>
+                <div class="slider-container">
+                    <input type="range" id="dayEnergy" min="1" max="10" value="5"
+                           oninput="document.getElementById('dayValue').textContent = this.value">
+                </div>
+            </div>
+
+            <!-- Вечерняя энергия -->
+            <div class="form-group">
+                <label>
+                    <span class="emoji">🌙</span>Вечерняя энергия:
+                    <span class="slider-value" id="eveningValue">5</span>/10
+                </label>
+                <div class="slider-container">
+                    <input type="range" id="eveningEnergy" min="1" max="10" value="5"
+                           oninput="document.getElementById('eveningValue').textContent = this.value">
+                </div>
+            </div>
+
+            <!-- Активности -->
+            <div class="form-group">
+                <label><span class="emoji">💼</span>Чем занимались:</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="work" value="работа">
+                        <label for="work">💼 Работа</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sport" value="спорт">
+                        <label for="sport">🏋️ Спорт</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="study" value="учёба">
+                        <label for="study">📚 Учёба</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="rest" value="отдых">
+                        <label for="rest">🏠 Отдых</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Питание -->
+            <div class="form-group">
+                <label><span class="emoji">🍽️</span>Питание:</label>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="breakfast" value="завтрак">
+                        <label for="breakfast">🥐 Завтрак</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="lunch" value="обед">
+                        <label for="lunch">🍱 Обед</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="dinner" value="ужин">
+                        <label for="dinner">🍝 Ужин</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="snacks" value="перекусы">
+                        <label for="snacks">🍪 Перекусы</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Стресс -->
+            <div class="form-group">
+                <label><span class="emoji">😰</span>Были стрессы/конфликты:</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="stressYes" name="stress" value="true">
+                        <label for="stressYes">Да</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="stressNo" name="stress" value="false" checked>
+                        <label for="stressNo">Нет</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Физическая активность -->
+            <div class="form-group">
+                <label><span class="emoji">💪</span>Физическая активность:</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="activityYes" name="activity" value="true" checked>
+                        <label for="activityYes">Да</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="activityNo" name="activity" value="false">
+                        <label for="activityNo">Нет</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Заметки -->
+            <div class="form-group">
+                <label><span class="emoji">📝</span>Заметки (необязательно):</label>
+                <textarea id="notes" placeholder="Как прошёл день? Что запомнилось?"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                ✅ Сохранить
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        document.getElementById('moodForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Собираем активности
+            const activities = [];
+            if (document.getElementById('work').checked) activities.push('работа');
+            if (document.getElementById('sport').checked) activities.push('спорт');
+            if (document.getElementById('study').checked) activities.push('учёба');
+            if (document.getElementById('rest').checked) activities.push('отдых');
+
+            // Собираем питание
+            const meals = [];
+            if (document.getElementById('breakfast').checked) meals.push('завтрак');
+            if (document.getElementById('lunch').checked) meals.push('обед');
+            if (document.getElementById('dinner').checked) meals.push('ужин');
+            if (document.getElementById('snacks').checked) meals.push('перекусы');
+
+            const data = {
+                date: new Date().toISOString().split('T')[0],
+                hour: new Date().toTimeString().slice(0, 5),
+                sleep_quality: parseInt(document.getElementById('sleep').value),
+                morning_energy: parseInt(document.getElementById('morningEnergy').value),
+                day_energy: parseInt(document.getElementById('dayEnergy').value),
+                evening_energy: parseInt(document.getElementById('eveningEnergy').value),
+                activities: activities.join(', ') || 'Не указано',
+                meals: meals.join(', ') || 'Не указано',
+                stress_conflicts: document.querySelector('input[name="stress"]:checked').value === 'true',
+                physical_activity: document.querySelector('input[name="activity"]:checked').value === 'true',
+                notes: document.getElementById('notes').value || '',
+                user_id: tg.initDataUnsafe?.user?.id || 0
+            };
+
+            // ЗАМЕНИТЕ НА ВАШ N8N WEBHOOK URL
+            const webhookUrl = 'YOUR_N8N_WEBHOOK_URL_HERE';
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    tg.showAlert('✅ Данные сохранены!', () => {
+                        tg.close();
+                    });
+                } else {
+                    tg.showAlert('❌ Ошибка сохранения. Попробуйте ещё раз.');
+                }
+            } catch (error) {
+                tg.showAlert('❌ Ошибка соединения: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
