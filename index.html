@@ -14,37 +14,33 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+            padding: 16px;
         }
 
         .container {
             max-width: 500px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         h1 {
             text-align: center;
-            color: #667eea;
-            margin-bottom: 30px;
-            font-size: 28px;
+            color: var(--tg-theme-button-color, #667eea);
+            margin-bottom: 24px;
+            font-size: 24px;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
+            margin-bottom: 8px;
+            color: var(--tg-theme-text-color, #333);
         }
 
         .slider-container {
@@ -53,28 +49,27 @@
 
         input[type="range"] {
             width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            background: #e0e0e0;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--tg-theme-hint-color, #e0e0e0);
             outline: none;
             -webkit-appearance: none;
         }
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: var(--tg-theme-button-color, #667eea);
             cursor: pointer;
         }
 
         input[type="range"]::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: var(--tg-theme-button-color, #667eea);
             cursor: pointer;
             border: none;
         }
@@ -83,40 +78,40 @@
             display: inline-block;
             margin-left: 10px;
             font-weight: bold;
-            color: #667eea;
-            font-size: 18px;
+            color: var(--tg-theme-button-color, #667eea);
+            font-size: 16px;
         }
 
         .checkbox-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
-            padding: 12px;
-            background: #f5f5f5;
-            border-radius: 10px;
+            padding: 10px;
+            background: var(--tg-theme-secondary-bg-color, #f5f5f5);
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
-        .checkbox-item:hover {
-            background: #e8e8e8;
+        .checkbox-item:active {
+            opacity: 0.7;
         }
 
         .checkbox-item input[type="checkbox"] {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
             cursor: pointer;
         }
 
         .radio-group {
             display: flex;
-            gap: 15px;
+            gap: 10px;
         }
 
         .radio-item {
@@ -124,69 +119,72 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
-            background: #f5f5f5;
-            border-radius: 10px;
+            padding: 12px;
+            background: var(--tg-theme-secondary-bg-color, #f5f5f5);
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
-        .radio-item:hover {
-            background: #e8e8e8;
+        .radio-item:active {
+            opacity: 0.7;
         }
 
         .radio-item input[type="radio"] {
-            margin-right: 8px;
-            width: 18px;
-            height: 18px;
+            margin-right: 6px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
         }
 
         textarea {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid var(--tg-theme-hint-color, #e0e0e0);
+            border-radius: 8px;
             font-size: 14px;
             font-family: inherit;
             resize: vertical;
-            min-height: 80px;
+            min-height: 70px;
+            background: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
         }
 
         textarea:focus {
             outline: none;
-            border-color: #667eea;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
+            border-color: var(--tg-theme-button-color, #667eea);
         }
 
         .emoji {
-            font-size: 20px;
-            margin-right: 5px;
+            font-size: 18px;
+            margin-right: 4px;
+        }
+
+        .status {
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div id="status" class="status"></div>
+        
         <h1>📊 Дневник настроения</h1>
         
         <form id="moodForm">
@@ -194,48 +192,40 @@
             <div class="form-group">
                 <label>
                     <span class="emoji">😴</span>Качество сна:
-                    <span class="slider-value" id="sleepValue">5</span>/10
+                    <span class="slider-value" id="sleepValue">7</span>/10
                 </label>
-                <div class="slider-container">
-                    <input type="range" id="sleep" min="1" max="10" value="5" 
-                           oninput="document.getElementById('sleepValue').textContent = this.value">
-                </div>
+                <input type="range" id="sleep" min="1" max="10" value="7" 
+                       oninput="document.getElementById('sleepValue').textContent = this.value">
             </div>
 
             <!-- Утренняя энергия -->
             <div class="form-group">
                 <label>
                     <span class="emoji">🌅</span>Утренняя энергия:
-                    <span class="slider-value" id="morningValue">5</span>/10
+                    <span class="slider-value" id="morningValue">8</span>/10
                 </label>
-                <div class="slider-container">
-                    <input type="range" id="morningEnergy" min="1" max="10" value="5"
-                           oninput="document.getElementById('morningValue').textContent = this.value">
-                </div>
+                <input type="range" id="morningEnergy" min="1" max="10" value="8"
+                       oninput="document.getElementById('morningValue').textContent = this.value">
             </div>
 
             <!-- Дневная энергия -->
             <div class="form-group">
                 <label>
                     <span class="emoji">☀️</span>Дневная энергия:
-                    <span class="slider-value" id="dayValue">5</span>/10
+                    <span class="slider-value" id="dayValue">7</span>/10
                 </label>
-                <div class="slider-container">
-                    <input type="range" id="dayEnergy" min="1" max="10" value="5"
-                           oninput="document.getElementById('dayValue').textContent = this.value">
-                </div>
+                <input type="range" id="dayEnergy" min="1" max="10" value="7"
+                       oninput="document.getElementById('dayValue').textContent = this.value">
             </div>
 
             <!-- Вечерняя энергия -->
             <div class="form-group">
                 <label>
                     <span class="emoji">🌙</span>Вечерняя энергия:
-                    <span class="slider-value" id="eveningValue">5</span>/10
+                    <span class="slider-value" id="eveningValue">6</span>/10
                 </label>
-                <div class="slider-container">
-                    <input type="range" id="eveningEnergy" min="1" max="10" value="5"
-                           oninput="document.getElementById('eveningValue').textContent = this.value">
-                </div>
+                <input type="range" id="eveningEnergy" min="1" max="10" value="6"
+                       oninput="document.getElementById('eveningValue').textContent = this.value">
             </div>
 
             <!-- Активности -->
@@ -319,68 +309,102 @@
                 <label><span class="emoji">📝</span>Заметки (необязательно):</label>
                 <textarea id="notes" placeholder="Как прошёл день? Что запомнилось?"></textarea>
             </div>
-
-            <button type="submit" class="submit-btn">
-                ✅ Сохранить
-            </button>
         </form>
     </div>
+
     <script>
-    document.getElementById('moodForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
+        // Инициализация Telegram WebApp
+        let tg = window.Telegram.WebApp;
+        tg.expand();
         
-        const date = document.getElementById('date').value;
-        const mood = document.querySelector('input[name="mood"]:checked')?.value;
-        const activity = document.querySelector('input[name="activity"]:checked')?.value;
-        const notes = document.getElementById('notes').value;
+        // Показываем главную кнопку
+        tg.MainButton.text = "💾 Сохранить";
+        tg.MainButton.show();
 
-        if (!mood) {
-            alert('⚠️ Пожалуйста, выберите настроение!');
-            return;
-        }
-
-        // ЗДЕСЬ ЗАМЕНИТЕ НА ВАШ N8N WEBHOOK URL
-        const webhookUrl = 'https://5773171-do48756.twc1.net/webhook-test/mood';
-
-        try {
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    date: date,
-                    mood: mood,
-                    activity: activity,
-                    notes: notes,
-                    timestamp: new Date().toISOString()
-                })
+        // Обработчик нажатия на главную кнопку
+        tg.MainButton.onClick(async function() {
+            tg.MainButton.showProgress();
+            
+            // Собираем данные формы
+            const now = new Date();
+            const date = now.toISOString().split('T')[0];
+            const hour = now.toTimeString().slice(0,5);
+            
+            const sleep_quality = parseInt(document.getElementById('sleep').value);
+            const morning_energy = parseInt(document.getElementById('morningEnergy').value);
+            const day_energy = parseInt(document.getElementById('dayEnergy').value);
+            const evening_energy = parseInt(document.getElementById('eveningEnergy').value);
+            
+            // Собираем активности
+            const activities = [];
+            document.querySelectorAll('#work, #sport, #study, #rest').forEach(cb => {
+                if (cb.checked) activities.push(cb.value);
             });
+            
+            // Собираем питание
+            const meals = [];
+            document.querySelectorAll('#breakfast, #lunch, #dinner, #snacks').forEach(cb => {
+                if (cb.checked) meals.push(cb.value);
+            });
+            
+            const stress_conflicts = document.querySelector('input[name="stress"]:checked').value === 'true';
+            const physical_activity = document.querySelector('input[name="activity"]:checked').value === 'true';
+            const notes = document.getElementById('notes').value;
 
-            if (response.ok) {
-                alert('✅ Настроение сохранено!');
-                document.getElementById('moodForm').reset();
-                // Сброс выбранных смайликов
-                document.querySelectorAll('.emoji-option').forEach(em => {
-                    em.classList.remove('selected');
+            // Отправляем в n8n
+            const webhookUrl = 'https://5773171-do48756.twc1.net/webhook-test/mood';
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        date: date,
+                        hour: hour,
+                        sleep_quality: sleep_quality,
+                        morning_energy: morning_energy,
+                        day_energy: day_energy,
+                        evening_energy: evening_energy,
+                        activities: activities.join(', '),
+                        meals: meals.join(', '),
+                        stress_conflicts: stress_conflicts,
+                        physical_activity: physical_activity,
+                        notes: notes
+                    })
                 });
-            } else {
-                alert('❌ Ошибка сохранения. Попробуйте позже.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('❌ Ошибка соединения с сервером.');
-        }
-    });
 
-    // Функция выбора emoji
-    document.querySelectorAll('.emoji-option').forEach(emoji => {
-        emoji.addEventListener('click', function() {
-            document.querySelectorAll('.emoji-option').forEach(e => e.classList.remove('selected'));
-            this.classList.add('selected');
-            document.getElementById(this.dataset.value).checked = true;
+                tg.MainButton.hideProgress();
+
+                if (response.ok) {
+                    showStatus('✅ Данные успешно сохранены!', 'success');
+                    tg.showAlert('✅ Данные успешно сохранены!', function() {
+                        tg.close();
+                    });
+                } else {
+                    showStatus('❌ Ошибка сохранения', 'error');
+                    tg.showAlert('❌ Ошибка сохранения. Попробуйте позже.');
+                }
+            } catch (error) {
+                tg.MainButton.hideProgress();
+                console.error('Error:', error);
+                showStatus('❌ Ошибка соединения', 'error');
+                tg.showAlert('❌ Ошибка соединения с сервером.');
+            }
         });
-    });
-</script>
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status ' + type;
+            setTimeout(() => {
+                status.className = 'status';
+            }, 3000);
+        }
+
+        // Telegram уведомление о готовности
+        tg.ready();
+    </script>
 </body>
 </html>
