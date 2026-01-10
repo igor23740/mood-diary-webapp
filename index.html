@@ -325,66 +325,62 @@
             </button>
         </form>
     </div>
-
     <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand();
+    document.getElementById('moodForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const date = document.getElementById('date').value;
+        const mood = document.querySelector('input[name="mood"]:checked')?.value;
+        const activity = document.querySelector('input[name="activity"]:checked')?.value;
+        const notes = document.getElementById('notes').value;
 
-        document.getElementById('moodForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        if (!mood) {
+            alert('⚠️ Пожалуйста, выберите настроение!');
+            return;
+        }
 
-            // Собираем активности
-            const activities = [];
-            if (document.getElementById('work').checked) activities.push('работа');
-            if (document.getElementById('sport').checked) activities.push('спорт');
-            if (document.getElementById('study').checked) activities.push('учёба');
-            if (document.getElementById('rest').checked) activities.push('отдых');
+        // ЗДЕСЬ ЗАМЕНИТЕ НА ВАШ N8N WEBHOOK URL
+        const webhookUrl = 'https://5773171-do48756.twc1.net/webhook-test/mood';
 
-            // Собираем питание
-            const meals = [];
-            if (document.getElementById('breakfast').checked) meals.push('завтрак');
-            if (document.getElementById('lunch').checked) meals.push('обед');
-            if (document.getElementById('dinner').checked) meals.push('ужин');
-            if (document.getElementById('snacks').checked) meals.push('перекусы');
+        try {
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    date: date,
+                    mood: mood,
+                    activity: activity,
+                    notes: notes,
+                    timestamp: new Date().toISOString()
+                })
+            });
 
-            const data = {
-                date: new Date().toISOString().split('T')[0],
-                hour: new Date().toTimeString().slice(0, 5),
-                sleep_quality: parseInt(document.getElementById('sleep').value),
-                morning_energy: parseInt(document.getElementById('morningEnergy').value),
-                day_energy: parseInt(document.getElementById('dayEnergy').value),
-                evening_energy: parseInt(document.getElementById('eveningEnergy').value),
-                activities: activities.join(', ') || 'Не указано',
-                meals: meals.join(', ') || 'Не указано',
-                stress_conflicts: document.querySelector('input[name="stress"]:checked').value === 'true',
-                physical_activity: document.querySelector('input[name="activity"]:checked').value === 'true',
-                notes: document.getElementById('notes').value || '',
-                user_id: tg.initDataUnsafe?.user?.id || 0
-            };
-
-            // ЗАМЕНИТЕ НА ВАШ N8N WEBHOOK URL
-            const webhookUrl = 'YOUR_N8N_WEBHOOK_URL_HERE';
-
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
+            if (response.ok) {
+                alert('✅ Настроение сохранено!');
+                document.getElementById('moodForm').reset();
+                // Сброс выбранных смайликов
+                document.querySelectorAll('.emoji-option').forEach(em => {
+                    em.classList.remove('selected');
                 });
-
-                if (response.ok) {
-                    tg.showAlert('✅ Данные сохранены!', () => {
-                        tg.close();
-                    });
-                } else {
-                    tg.showAlert('❌ Ошибка сохранения. Попробуйте ещё раз.');
-                }
-            } catch (error) {
-                tg.showAlert('❌ Ошибка соединения: ' + error.message);
+            } else {
+                alert('❌ Ошибка сохранения. Попробуйте позже.');
             }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('❌ Ошибка соединения с сервером.');
+        }
+    });
+
+    // Функция выбора emoji
+    document.querySelectorAll('.emoji-option').forEach(emoji => {
+        emoji.addEventListener('click', function() {
+            document.querySelectorAll('.emoji-option').forEach(e => e.classList.remove('selected'));
+            this.classList.add('selected');
+            document.getElementById(this.dataset.value).checked = true;
         });
-    </script>
+    });
+</script>
 </body>
 </html>
