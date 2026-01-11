@@ -191,6 +191,7 @@
             cursor: pointer;
         }
 
+        /* ИСПРАВЛЕНО: Матовое серое стекло вместо белого */
         input[type="time"] {
             width: 100%;
             padding: 12px;
@@ -198,8 +199,9 @@
             border-radius: 12px;
             font-size: 16px;
             font-family: inherit;
-            background: rgba(255, 255, 255, 0.95);
-            color: #2d3748;
+            background: rgba(200, 200, 220, 0.25);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
             transition: all 0.2s;
             font-weight: 500;
         }
@@ -208,9 +210,14 @@
             outline: none;
             border-color: rgba(255, 255, 255, 0.6);
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
-            background: #ffffff;
+            background: rgba(220, 220, 240, 0.35);
         }
 
+        input[type="time"]::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ИСПРАВЛЕНО: Матовое серое стекло + включена проверка орфографии */
         textarea {
             width: 100%;
             padding: 12px;
@@ -220,20 +227,28 @@
             font-family: inherit;
             resize: vertical;
             min-height: 80px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #2d3748;
+            background: rgba(200, 200, 220, 0.25);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
             transition: all 0.2s;
+            /* ВКЛЮЧАЕМ ПРОВЕРКУ ОРФОГРАФИИ */
+            spellcheck: true;
+            /* Убираем блокировку контекстного меню */
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
         }
 
         textarea:focus {
             outline: none;
             border-color: rgba(255, 255, 255, 0.6);
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
-            background: #ffffff;
+            background: rgba(220, 220, 240, 0.35);
         }
 
         textarea::placeholder {
-            color: #a0aec0;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .emoji {
@@ -422,7 +437,7 @@
             <!-- Заметки -->
             <div class="form-group">
                 <label><span class="emoji">📝</span>Заметки (необязательно):</label>
-                <textarea id="notes" placeholder="Как прошёл день? Что запомнилось?"></textarea>
+                <textarea id="notes" placeholder="Как прошёл день? Что запомнилось?" spellcheck="true"></textarea>
             </div>
         </form>
     </div>
