@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дневник настроения</title>
+    <title>Дневник здоровья</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
@@ -137,6 +137,22 @@
             cursor: pointer;
         }
 
+        input[type="time"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--tg-theme-hint-color, #e0e0e0);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            background: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+        }
+
+        input[type="time"]:focus {
+            outline: none;
+            border-color: var(--tg-theme-button-color, #667eea);
+        }
+
         textarea {
             width: 100%;
             padding: 12px;
@@ -179,15 +195,46 @@
             color: #721c24;
             display: block;
         }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .time-input-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .time-input-wrapper label {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div id="status" class="status"></div>
         
-        <h1>📊 Дневник настроения</h1>
+        <h1>📊 Дневник здоровья</h1>
         
         <form id="moodForm">
+            <!-- НОВОЕ: Режим сна -->
+            <div class="form-group">
+                <label><span class="emoji">🌙</span>Режим сна:</label>
+                <div class="time-grid">
+                    <div class="time-input-wrapper">
+                        <label for="bedtime">Лёг спать:</label>
+                        <input type="time" id="bedtime" value="23:30">
+                    </div>
+                    <div class="time-input-wrapper">
+                        <label for="wakeTime">Проснулся:</label>
+                        <input type="time" id="wakeTime" value="07:00">
+                    </div>
+                </div>
+            </div>
+
             <!-- Качество сна -->
             <div class="form-group">
                 <label>
@@ -330,6 +377,8 @@
             const date = now.toISOString().split('T')[0];
             const hour = now.toTimeString().slice(0,5);
             
+            const bedtime = document.getElementById('bedtime').value;
+            const wake_time = document.getElementById('wakeTime').value;
             const sleep_quality = parseInt(document.getElementById('sleep').value);
             const morning_energy = parseInt(document.getElementById('morningEnergy').value);
             const day_energy = parseInt(document.getElementById('dayEnergy').value);
@@ -363,6 +412,8 @@
                     body: JSON.stringify({
                         date: date,
                         hour: hour,
+                        bedtime: bedtime,
+                        wake_time: wake_time,
                         sleep_quality: sleep_quality,
                         morning_energy: morning_energy,
                         day_energy: day_energy,
