@@ -22,17 +22,20 @@
         .container {
             max-width: 500px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
             padding: 24px;
         }
 
         h1 {
             text-align: center;
-            color: #667eea;
+            color: #ffffff;
             margin-bottom: 24px;
             font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .form-group {
@@ -44,7 +47,8 @@
             font-size: 15px;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #333;
+            color: #ffffff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .slider-container {
@@ -55,7 +59,7 @@
             width: 100%;
             height: 6px;
             border-radius: 3px;
-            background: linear-gradient(90deg, #e0e0e0 0%, #667eea 100%);
+            background: rgba(255, 255, 255, 0.3);
             outline: none;
             -webkit-appearance: none;
         }
@@ -65,27 +69,28 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: #ffffff;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         input[type="range"]::-moz-range-thumb {
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: #ffffff;
             cursor: pointer;
             border: none;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .slider-value {
             display: inline-block;
             margin-left: 10px;
             font-weight: bold;
-            color: #667eea;
+            color: #ffffff;
             font-size: 16px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .checkbox-grid {
@@ -98,16 +103,17 @@
             display: flex;
             align-items: center;
             padding: 10px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.35);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
         }
 
         .checkbox-item:active {
@@ -122,6 +128,13 @@
             accent-color: #667eea;
         }
 
+        .checkbox-item label {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
         .radio-group {
             display: flex;
             gap: 10px;
@@ -133,16 +146,17 @@
             align-items: center;
             justify-content: center;
             padding: 12px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .radio-item:hover {
+            background: rgba(255, 255, 255, 0.35);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
         }
 
         .radio-item:active {
@@ -157,42 +171,49 @@
             accent-color: #667eea;
         }
 
+        .radio-item label {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
         input[type="time"] {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e8ecf1;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             font-size: 16px;
             font-family: inherit;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             color: #333;
             transition: all 0.2s;
         }
 
         input[type="time"]:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
         }
 
         textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e8ecf1;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             font-size: 14px;
             font-family: inherit;
             resize: vertical;
             min-height: 70px;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             color: #333;
             transition: all 0.2s;
         }
 
         textarea:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
         }
 
         .emoji {
@@ -206,16 +227,17 @@
             border-radius: 8px;
             margin-bottom: 16px;
             display: none;
+            backdrop-filter: blur(10px);
         }
 
         .status.success {
-            background: #d4edda;
+            background: rgba(212, 237, 218, 0.9);
             color: #155724;
             display: block;
         }
 
         .status.error {
-            background: #f8d7da;
+            background: rgba(248, 215, 218, 0.9);
             color: #721c24;
             display: block;
         }
@@ -234,7 +256,7 @@
         .time-input-wrapper label {
             font-size: 13px;
             margin-bottom: 6px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.9);
         }
     </style>
 </head>
